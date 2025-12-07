@@ -1,9 +1,21 @@
 // config/stripe.ts
+
 import Stripe from "stripe";
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2023-10-16",
-});
+/**
+ * Stripe configuration
+ * --------------------
+ * Uses server-side secret key only.
+ * Never expose this file to client components.
+ */
 
-// Your Stripe Price ID for PRO plan (monthly)
-export const STRIPE_PRO_PRICE_ID = "price_PRO_MONTHLY_ID";
+export const stripe = new Stripe(
+  process.env.STRIPE_SECRET_KEY as string,
+  {
+    apiVersion: "2023-10-16",
+  }
+);
+
+// ✅ Replace this with your REAL Stripe Price ID
+export const STRIPE_PRO_PRICE_ID =
+  process.env.STRIPE_PRO_PRICE_ID as string;
