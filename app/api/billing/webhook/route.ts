@@ -1,8 +1,8 @@
 // app/api/billing/webhook/route.ts
 
 import { NextResponse } from "next/server";
-import { stripe } from "@/config/stripe";
-import { upgradeSessionTier } from "@/lib/auth";
+import { stripe } from "../../../../config/stripe";
+import { upgradeSessionTier } from "../../../../lib/auth";
 
 export async function POST(req: Request) {
   const sig = req.headers.get("stripe-signature");
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     );
   } catch (err: any) {
     return NextResponse.json(
-      { error: `Webhook Error: ${err.message}` },
+      { error: err.message },
       { status: 400 }
     );
   }
