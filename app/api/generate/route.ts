@@ -1,16 +1,18 @@
-import { getSession } from "@/lib/auth";
+import { NextResponse } from "next/server";
 
-// ...
+export async function POST(req: Request) {
+  const body = await req.json();
 
-const session = getSession();
-if (!session) {
-  return NextResponse.json({ success: false, error: "Not authenticated" }, { status: 401 });
+  return NextResponse.json({
+    success: true,
+    course: {
+      title: body?.title ?? "Sample Course",
+      modules: [
+        {
+          title: "Introduction",
+          lessons: ["Overview", "Goals", "Next Steps"]
+        }
+      ]
+    }
+  });
 }
-
-checkRateLimit(session.email);
-
-assertTierAccess(session.tier, {
-  requestedLanguage: language,
-  requestedBibleTranslation: bibleTranslation,
-  ministryMode,
-});
